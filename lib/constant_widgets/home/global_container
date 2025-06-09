@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+
+class GlobalContainer extends StatelessWidget {
+  final String ticketNumber;
+  final Widget? status;
+  final String title;
+  final String? time;
+  final Color? color;
+  final TextStyle? firststyle;
+  final TextStyle? secondstyle;
+  final TextStyle? thirdstyle;
+  final TextStyle? rightsidestyle;
+  final double? width;
+  final double? height;
+  final Widget? leadingwidget;
+  final double? borderRadius;
+  final TextOverflow? overflow;
+  final int? maxLines;
+  final Widget? trailingwidget;
+  final TextStyle? timestyle;
+
+  GlobalContainer({
+    Key? key,
+    required this.ticketNumber,
+    required this.status,
+    required this.title,
+    this.time,
+    required this.color,
+    this.firststyle,
+    this.secondstyle,
+    this.thirdstyle,
+    this.rightsidestyle,
+    this.width,
+    this.height,
+    this.leadingwidget,
+    this.borderRadius,
+    this.overflow,
+    this.maxLines,
+    this.trailingwidget,
+    this.timestyle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadius ?? 12.0),
+      ),
+      elevation: 1,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(borderRadius ?? 12.0),
+        ),
+        width: width,
+        height: height,
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  ticketNumber,
+                  style: firststyle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                if (status != null) status!,
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              title,
+              style: thirdstyle,
+              maxLines: maxLines ?? 2,
+              overflow: overflow ?? TextOverflow.ellipsis,
+            ),
+            SizedBox(height: 10),
+            if (time != null)
+              Row(
+                children: [
+                  if (leadingwidget != null) ...[
+                    leadingwidget!,
+                    SizedBox(width: 4),
+                  ],
+                  Text(
+                    time!,
+                    style: timestyle,
+                    overflow: overflow ?? TextOverflow.ellipsis,
+                  ),
+                  Spacer(),
+                  if (trailingwidget != null) trailingwidget!,
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
